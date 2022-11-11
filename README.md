@@ -70,7 +70,7 @@ erscheinen.
 
 # Bei Problemen:
 
-... bitte Mike Sperber kontaktieren.
+... bitte Johannes Maier kontaktieren.
 
 ## Elm
 
