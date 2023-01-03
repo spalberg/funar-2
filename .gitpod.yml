@@ -9,3 +9,4 @@ vscode:
   extensions:
     - bbenoist.Nix
     - haskell.haskell
+    - mkhl.direnv
