@@ -3,6 +3,8 @@
 Bei der Schulung ist es sinnvoll, den Code nachzuvollziehen
 bzw. eigenen zu schreiben.
 
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/spalberg/funar-2)
+
 ## Vorkurs
 
 Für den Vorkurs bitte Racket installieren, mindestens Version 8.0:
