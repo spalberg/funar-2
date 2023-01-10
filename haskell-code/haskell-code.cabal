@@ -1,5 +1,5 @@
 cabal-version:       2.4
-name:                funar-code
+name:                haskell-code
 version:             0.1.0.0
 license:             NONE
 author:              Mike Sperber
@@ -9,6 +9,7 @@ library
   build-depends:       QuickCheck,
                        base,
                        containers,
+                       mtl,
                        parallel,
                        sqlite-simple,
                        text,

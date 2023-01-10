@@ -5,9 +5,10 @@ let
   # nix-shell -p nix --run 'niv modify --help'
   sources = import ./nix/sources.nix;
   pkgs = import sources.nixpkgs { config.allowUnfree = withVSCode; };
-  funar-code =
-    pkgs.haskellPackages.callCabal2nix "funar-code" (pkgs.lib.cleanSource ./.)
-    { };
+  hearts =
+    pkgs.haskellPackages.callCabal2nix "hearts" (pkgs.lib.cleanSource ./hearts) { };
+  haskell-code =
+    pkgs.haskellPackages.callCabal2nix "haskell-code" (pkgs.lib.cleanSource ./haskell-code) { };
   vscodeFunar = pkgs.vscode-with-extensions.override {
     vscodeExtensions = with pkgs.vscode-extensions; [
       bbenoist.nix
@@ -16,7 +17,7 @@ let
     ];
   };
 in pkgs.haskellPackages.shellFor {
-  packages = _: [ funar-code ];
+  packages = _: [ hearts haskell-code ];
   buildInputs = (with pkgs; [ cabal-install ghcid haskell-language-server ])
     ++ pkgs.lib.optional withVSCode vscodeFunar;
   shellHook = ''
