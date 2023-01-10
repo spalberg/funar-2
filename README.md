@@ -25,7 +25,7 @@ Setups Probleme durch UID-Mapping bereitet.
   projektspezifischen, entsprechend gekennzeichneten Umgebung (kann
   etwas dauern, da viel heruntergeladen werden muss)
 - Mit `code .` VSCode in diesem Ordner öffnen
-- In der Datei `Intro.hs` das `module` verunstalten (z. B. einen
+- In der Datei `haskell-code/Intro.hs` das `module` verunstalten (z. B. einen
   Buchstaben entfernen)
 - Nach etwas Wartezeit (in der unteren Leiste sollte "Processing" oder
   ähnlich zu sehen sein) sollte etwas rot unterschlängelt werden
@@ -62,7 +62,7 @@ vonstatten gehen.
 
 - wenn das `direnv`-Plugin nachfragt, auf `Allow` klicken, und
   evtl. danach "Restart" akzeptieren
-- In der Datei `Intro.hs` das `module` verunstalten (z. B. einen
+- In der Datei `haskell-code/Intro.hs` das `module` verunstalten (z. B. einen
   Buchstaben entfernen)
 
 Nach etwas Ladezeit (die erforderlichen Haskell-Pakete müssen
