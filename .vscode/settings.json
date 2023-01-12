@@ -1,5 +1,6 @@
 {
   "haskell.manageHLS": "PATH",
+  "extensions.ignoreRecommendations": true,
   "haskell.plugin.hlint.diagnosticsOn": false,
   "terminal.integrated.profiles.linux": {
     "nix-shell": {
