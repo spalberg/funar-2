@@ -18,6 +18,10 @@
        (add-element (rev (rest list))
                     (first list))))))
 
+#;(define rev
+  (lambda (list)
+    (rev* list empty)))
+
 ; 1 + 2 + 3 + 4 + ... + (n-1) + n -> n*(n+1)/2 -> O(n^2)
 
 ; Element an Liste _hinten_ anhängen
@@ -49,5 +53,17 @@
              (cons (first list)
                    acc))))))
 
+(check-expect (rev* (list 1 2 3 4) empty)
+              (list 4 3 2 1))
+(check-expect (rev* empty empty)
+              empty)
 
+(rev* (list 1 2 3 4) empty)
 
+; Übung:
+; - Elemente einer Liste summieren -> mit Akkumulator
+; - extract endrekursiv
+(: list-sum ((list-of number) -> number))
+
+(check-expect (list-sum (list 1 2 3 4))
+              10)
