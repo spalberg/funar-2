@@ -48,8 +48,8 @@
 ; natural : Signatur für natürliche Zahlen
 
 #;(define make-time-from-msm
-  (lambda (msm)
-    ...))
+    (lambda (msm)
+      ...))
 
 (: make-time (natural natural -> time))
 (: time-hour (time -> natural))
@@ -79,7 +79,7 @@
 
 ; hilfreich: quotient, remainder
 #;(check-expect (msm->time 5)
-              (make-time 0 5))
+                (make-time 0 5))
 
 ;; texanischer Highway
 
@@ -89,6 +89,7 @@
 
 (define-record dillo
   make-dillo
+  dillo?
   (dillo-alive? boolean)
   (dillo-weight number))
 
@@ -111,3 +112,73 @@
     (make-dillo #f (dillo-weight dillo))))
 
 ; Gürteltier füttern
+(: feed-dillo (dillo natural -> dillo))
+
+(check-expect (feed-dillo dillo1 3)
+              (make-dillo #t 13))
+(check-expect (feed-dillo dillo2 3)
+              dillo2)
+
+#;(define feed-dillo
+    (lambda (dillo amount)
+      (cond
+        ((dillo-alive? dillo)
+         (make-dillo #t (+ amount
+                           (dillo-weight dillo))))
+        (else dillo))))
+
+; if -> cond mit genau zwei Fällen: (if <pred> <then> <else>)
+(define feed-dillo
+  (lambda (dillo amount)
+    (define alive? (dillo-alive? dillo)) ; lokale "Variable"
+    (if alive?
+        (make-dillo #t (+ amount
+                          (dillo-weight dillo)))
+        dillo)))
+
+; gibt auch noch andere Tiere auf dem Highway
+
+; Papagei hat folgende Eigenschaften
+; - Gewicht
+; - Satz, den er sagen kann
+
+(define-record parrot ; <- Signatur
+  make-parrot
+  (parrot-sentence string)
+  (parrot-weight natural))
+
+(define parrot1 (make-parrot "Hallo" 1))
+(define parrot2 (make-parrot "Tschüss" 2))
+
+; Papagei überfahren
+(: run-over-parrot (parrot -> parrot))
+
+(check-expect (run-over-parrot parrot1)
+              (make-parrot "" 1))
+(check-expect (run-over-parrot parrot2)
+              (make-parrot "" 2))
+
+(define run-over-parrot
+  (lambda (parrot)
+    (make-parrot "" (parrot-weight parrot))))
+
+; Tier ist eins der Folgenden
+; (gemischte Daten)
+; - Papagei
+; - Gürteltier
+(define animal
+  (signature (mixed dillo parrot)))
+
+; Tiere überfahren
+(: run-over-animal (animal -> animal))
+
+(check-expect (run-over-animal dillo1)
+              (run-over-dillo dillo1))
+(check-expect (run-over-animal parrot1)
+              (run-over-parrot parrot1))
+
+(define run-over-animal
+  (lambda (animal)
+    (cond
+      (... ...)
+      (... ...))))
