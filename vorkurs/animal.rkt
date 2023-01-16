@@ -301,7 +301,7 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
         (else
          (cons (first list) (extract-evens (rest list)))))))
 
-(define even?
+#;(define even?
   (lambda (n)
     (= (remainder n 2)
        0)))
