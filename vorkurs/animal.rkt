@@ -73,4 +73,4 @@
 
 ; Übung: Minuten seit Mitternacht rein -> Record raus
 
-
+; hilfreich: quotient, remainder
