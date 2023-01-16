@@ -34,3 +34,9 @@ RUN . /home/gitpod/.nix-profile/etc/profile.d/nix.sh \
 RUN . /home/gitpod/.nix-profile/etc/profile.d/nix.sh \
   && nix-env -i direnv \
   && direnv hook bash >> /home/gitpod/.bashrc
+
+# Speed up build by caching
+COPY nix nix
+RUN . /home/gitpod/.nix-profile/etc/profile.d/nix.sh \
+  && nix-build -E "(import (import ./nix/sources.nix).nixpkgs {}).haskell-language-server" \
+               -E "(import (import ./nix/sources.nix).nixpkgs {}).cabal-install"
