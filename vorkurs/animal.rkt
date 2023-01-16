@@ -246,6 +246,8 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 ; vierelementige Liste: 6 7 2 5
 (define list4 (cons 6 list3))
 
+(define list-of-numbers (list-of number))
+
 ; Elemente einer Liste aufsummieren
 (: list-sum (list-of-numbers -> number))
 
@@ -361,3 +363,6 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
                  (extract p? r))
            (extract p? r))))))
 
+(check-expect (extract? (lambda (s) (string=? s "abc"))
+                        (cons "abc" (cons "foo" empty))))
+              
