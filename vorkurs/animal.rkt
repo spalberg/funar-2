@@ -418,6 +418,7 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
               7)
 
 ; list-map aus Übung
+; muss nicht überall %a sein -> verallgemeinerte Version:
 (: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
 
 (define list-map
