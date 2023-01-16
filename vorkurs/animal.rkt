@@ -398,3 +398,7 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 (define double
   (lambda (x)
     (* 2 x)))
+
+; Übung: Abstraktion für list-sum und list-product?
+; vielleicht erst mal für Zahlen
+; anschließend: geht das auch allgemeiner?
