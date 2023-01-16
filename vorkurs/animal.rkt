@@ -211,8 +211,13 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 
+#;(define list-of-numbers
+    (signature (mixed empty-list cons-list-of-numbers)))
+
 (define list-of
-  (signature (mixed empty-list cons-list-of-numbers)))
+  (lambda (element)
+    (signature (mixed empty-list
+                      (cons-list-of element)))))
 
 (define-record empty-list
   make-empty
@@ -223,11 +228,11 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 ; Eine cons-Liste hat folgende Eigenschaften:
 ; - erstes Element
 ; - Rest-Liste
-(define-record cons-list-of-numbers
+(define-record (cons-list-of element)
   cons
   cons?
-  (first number)
-  (rest list-of-numbers))
+  (first element) ; war: number
+  (rest (list-of element)))
 
 ; einelementige Liste
 (define list1 (cons 5 empty))
