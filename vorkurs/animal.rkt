@@ -393,7 +393,7 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
              (run-over-animals (rest list)))))))
 
 ; Übung: 1. alle Zahlen in einer Liste verdoppeln
-;        2. Abstraktion -> ???
+;        2. Abstraktion -> ??? (siehe extract)
 (: double (number -> number))
 (define double
   (lambda (x)
