@@ -47,6 +47,10 @@
   (time-minute natural))
 ; natural : Signatur für natürliche Zahlen
 
+#;(define make-time-from-msm
+  (lambda (msm)
+    ...))
+
 (: make-time (natural natural -> time))
 (: time-hour (time -> natural))
 (: time-minute (time -> natural))
@@ -74,3 +78,36 @@
 ; Übung: Minuten seit Mitternacht rein -> Record raus
 
 ; hilfreich: quotient, remainder
+#;(check-expect (msm->time 5)
+              (make-time 0 5))
+
+;; texanischer Highway
+
+; Gürteltier hat folgende Eigenschaften:
+; - Gewicht
+; - lebendig oder tot
+
+(define-record dillo
+  make-dillo
+  (dillo-alive? boolean)
+  (dillo-weight number))
+
+; Beispiele:
+; lebendiges GT, Gewicht 10
+(define dillo1 (make-dillo #t 10))
+; totes GT, Gewicht 8
+(define dillo2 (make-dillo #f 8))
+
+; Gürteltier überfahren
+(: run-over-dillo (dillo -> dillo))
+
+(check-expect (run-over-dillo dillo1)
+              (make-dillo #f 10))
+(check-expect (run-over-dillo dillo2)
+              dillo2)
+
+(define run-over-dillo
+  (lambda (dillo)
+    (make-dillo #f (dillo-weight dillo))))
+
+; Gürteltier füttern
