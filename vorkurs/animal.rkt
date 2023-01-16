@@ -35,3 +35,21 @@
               #t)
 (check-expect (cute? "dog")
               #t)
+
+; Digitaluhr: Uhrzeit:
+; - Stunde UND
+; - Minute
+; UND -> zusammengesetzte Daten
+
+(define-record time ; <- Signatur
+  make-time ; Konstruktor
+  (time-hour natural) ; Selektoren
+  (time-minute natural))
+; natural : Signatur für natürliche Zahlen
+
+(: make-time (natural natural -> time))
+(: time-hour (time -> natural))
+(: time-minute (time -> natural))
+
+(define time1 (make-time 12 23))
+(define time2 (make-time 15 11))
