@@ -30,7 +30,7 @@
       ((string=? pet "snake") #f))))
 
 (check-expect (cute? "snake")
-              #t)
+              #f)
 (check-expect (cute? "cat")
               #t)
 (check-expect (cute? "dog")
