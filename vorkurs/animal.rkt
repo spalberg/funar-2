@@ -430,3 +430,5 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 
 (check-expect (list-map double list2)
               (cons 4 (cons 10 empty)))
+
+; weiter: -> rev.rkt
