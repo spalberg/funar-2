@@ -311,4 +311,30 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
     (cond
       ((empty? list) empty)
       ((cons? list)
-       (if ())))))
+       (define f (first list))
+       (define r (rest list))
+       (if (even? f)
+           (cons f
+                 (extract-evens r))
+           (extract-evens r))))))
+; ungerade Elemente aus Eingabeliste
+(: extract-odds (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens list1)
+              list1)
+(check-expect (extract-evens list2)
+              (cons 5 empty))
+(check-expect (extract-evens (cons 1 (cons 2 (cons 3 (cons 4 empty)))))
+              (cons 1 (cons 3 empty)))
+
+(define extract-odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (rest list))
+       (if (odd? f)
+           (cons f
+                 (extract-evens r))
+           (extract-evens r))))))
