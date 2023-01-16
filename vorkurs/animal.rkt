@@ -17,8 +17,8 @@
 
 ; Konstruktionsanleitung
 #;(define cute? ; sprich: cute-p
-  (lambda (pet)
-    ...))
+    (lambda (pet)
+      ...))
 
 ; Schablone:
 ; bei Daten, die Fallunterscheidung sind: Fälle unterschiedlich behandeln
@@ -53,3 +53,24 @@
 
 (define time1 (make-time 12 23))
 (define time2 (make-time 15 11))
+
+; Minuten seit Mitternacht ausrechnen
+(: msm (time -> natural))
+
+(check-expect (msm time1) 743)
+(check-expect (msm time2) 911)
+
+; Konstruktionsanleitung
+#;(define msm
+    (lambda (time)
+      ...))
+
+; Schablone -> zusammengesetzte Daten -> müssen alle Bestandteile anschauen
+(define msm
+  (λ (time) ; <- Lambda-Symbol kann via Menü eingefügt werden (Ctrl-\)
+    (+ (* 60 (time-hour time))
+       (time-minute time))))
+
+; Übung: Minuten seit Mitternacht rein -> Record raus
+
+
