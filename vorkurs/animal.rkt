@@ -402,3 +402,30 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 ; Übung: Abstraktion für list-sum und list-product?
 ; vielleicht erst mal für Zahlen
 ; anschließend: geht das auch allgemeiner?
+; Name?
+; signatur hier
+
+(define list-fold
+  (lambda (neutral op list)
+    (if (empty? list)
+        neutral
+        (op (first list)
+            (list-fold neutral op (rest list))))))
+
+(check-expect (list-fold 1 * list1)
+              5)
+(check-expect (list-fold 0 + list2)
+              7)
+
+; list-map aus Übung
+(: list-map ((%a -> %b) (list-of %a) -> (list-of %b)))
+
+(define list-map
+  (lambda (op list)
+    (if (empty? list)
+        empty
+        (cons (op (first list))
+              (list-map op (rest list))))))
+
+(check-expect (list-map double list2)
+              (cons 4 (cons 10 empty)))
