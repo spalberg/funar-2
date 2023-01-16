@@ -363,6 +363,6 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
                  (extract p? r))
            (extract p? r))))))
 
-(check-expect (extract? (lambda (s) (string=? s "abc"))
-                        (cons "abc" (cons "foo" empty))))
-              
+(check-expect (extract (lambda (s) (string=? s "abc"))
+                       (cons "abc" (cons "foo" empty)))
+              (cons "abc" empty))
