@@ -231,6 +231,7 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 
 ; einelementige Liste
 (define list1 (cons 5 empty))
+
 ; zweielementige Liste
 (define list2 (cons 2 (cons 5 empty)))
 
@@ -239,3 +240,51 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 
 ; vierelementige Liste: 6 7 2 5
 (define list4 (cons 6 list3))
+
+; Elemente einer Liste aufsummieren
+(: list-sum (list-of-numbers -> number))
+
+(check-expect (list-sum list1)
+              5)
+(check-expect (list-sum list2)
+              7)
+(check-expect (list-sum empty)
+              0)
+
+; Schablone
+(define list-sum
+  (lambda (list)
+    (cond
+      ((empty? list) 0) ; neutrales Element der Addition
+      ((cons? list)
+       (+ (first list)
+          (list-sum (rest list)))))))
+
+; Elemente einer Liste multiplizieren
+(: list-product (list-of-numbers -> number))
+
+(check-expect (list-product list1)
+              5)
+(check-expect (list-product list2)
+              10)
+(check-expect (list-product empty)
+              1)
+
+(define list-product
+  (lambda (list)
+    (cond
+      ((empty? list) 1) ; neutrales Element der Multiplikation
+      ((cons? list)
+       (* (first list)
+          (list-product (rest list)))))))
+
+; gerade Elemente aus Eingabeliste
+(: extract-evens (list-of-numbers -> list-of-numbers))
+
+(check-expect (extract-evens list1)
+              empty)
+(check-expect (extract-evens list2)
+              (cons 2 empty))
+(check-expect (cons 1 (cons 2 (cons 3 (cons 4 empty))))
+              (cons 2 (cons 4 empty)))
+
