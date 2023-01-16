@@ -366,3 +366,12 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 (check-expect (extract (lambda (s) (string=? s "abc"))
                        (cons "abc" (cons "foo" empty)))
               (cons "abc" empty))
+
+
+(define highway
+  (cons dillo1
+        (cons parrot1
+              (cons dillo2
+                    (cons parrot2 empty)))))
+
+; alle Tiere überfahren
