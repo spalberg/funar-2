@@ -144,6 +144,7 @@
 
 (define-record parrot ; <- Signatur
   make-parrot
+  parrot?
   (parrot-sentence string)
   (parrot-weight natural))
 
@@ -180,5 +181,27 @@
 (define run-over-animal
   (lambda (animal)
     (cond
-      (... ...)
-      (... ...))))
+      ((dillo? animal) (run-over-dillo animal))
+      ((parrot? animal) (run-over-parrot animal)))))
+
+#|
+interface Animal { Animal runOver()}; Animal feed(double amount); }
+class Dillo implements Animal { Animal runOver() { ...}}
+class Parrot implements Animal { Animal runOver() { ...}}
+
+neue Sorte ->
+class Snake implements Animal { Animal runOver() { ...}}
+
+Kehrseite: -> feed(double amount) hinzufügen
+           -> alles anpassen
+
+FP vs. OOP:
+- in FP billig, neue Funktionen zu definieren
+- in OOP billig, neue Klassen zu definieren
+
+Schön wäre: beides billig (expression problem -> Phil Wadler)
+|#
+
+
+
+
