@@ -211,7 +211,7 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
 ; - die leere Liste
 ; - eine Cons-Liste aus erstem Element und Rest-Liste
 
-(define list-of-numbers
+(define list-of
   (signature (mixed empty-list cons-list-of-numbers)))
 
 (define-record empty-list
