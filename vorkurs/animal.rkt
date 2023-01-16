@@ -285,6 +285,30 @@ Schön wäre: beides billig (expression problem -> Phil Wadler)
               empty)
 (check-expect (extract-evens list2)
               (cons 2 empty))
-(check-expect (cons 1 (cons 2 (cons 3 (cons 4 empty))))
+(check-expect (extract-evens (cons 1 (cons 2 (cons 3 (cons 4 empty)))))
               (cons 2 (cons 4 empty)))
 
+; Malte
+#;(define extract-evens
+    (lambda (list)
+      (cond
+        ((empty? list) empty)
+        ((and (cons? list)
+              (= (remainder (first list)
+                            2)
+                 1))
+         (extract-evens (rest list)))
+        (else
+         (cons (first list) (extract-evens (rest list)))))))
+
+(define even?
+  (lambda (n)
+    (= (remainder n 2)
+       0)))
+
+(define extract-evens
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (if ())))))
