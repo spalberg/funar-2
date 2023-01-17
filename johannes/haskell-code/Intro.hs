@@ -330,6 +330,18 @@ showIfEqual a x = if a == x then show x else ""
 Algebra:
 - Typ T
 - Operationen mit Signaturen
-- Gesetze / Gleichungen
+-- - Gesetze / Gleichungen
+
+Plus:
+- Typ T
+- neutrales Element: n (denk 0)
+- Operation: (op) :: T -> T -> T (denk +)
+- op n x == op x n == x
+
+(Monoid: falls assoziativ)
+
+Halbgruppe:
+- binäre Operation: op :: a -> a -> a
+- assoziativ: op (op a b) c == op a (op b c)
 
 -}
