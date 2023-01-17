@@ -330,5 +330,6 @@ showIfEqual a x = if a == x then show x else ""
 Algebra:
 - Typ T
 - Operationen mit Signaturen
+- Gesetze / Gleichungen
 
 -}
