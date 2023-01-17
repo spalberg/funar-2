@@ -2,7 +2,7 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 module Intro where
 
-import Prelude hiding (Semigroup, Monoid)
+-- import Prelude hiding (Semigroup, Monoid)
 
 x :: Integer
 -- x :: Integer = 7
@@ -162,3 +162,132 @@ multWith = (*)
 -- 3. Erweiterung:
 -- - Mixtur aus zwei Duschprodukten, bel. Anteile
 -- Funktion entsprechend anpassen
+
+data HairType = Straight | Wavy
+type PhValue = Integer
+type Ratio = Double
+
+data ShowerProduct
+    = Shampoo HairType
+    | Soap PhValue
+    | ShowerGel
+    | Mixture ShowerProduct ShowerProduct Ratio
+    -- Es ist gesichert, dass ratio1 + ratio2 = 100
+    -- | Mixture ShowerProductWithRatio ShowerProductWithRatio
+    -- | Mixture [(ShowerProduct, Ratio)]
+
+-- Make illegal states unrepresentable
+
+-- >>> Mixture (Shampoo Straight) (Mixture (MkSoap 5) ShowerGel 30) 50
+
+data ShowerProductWithRatio = MkShowerProductWithRatio Ratio ShowerProduct
+
+-- data Mixture = MkMixture ...
+
+calculateSoap :: ShowerProduct -> Ratio
+calculateSoap (Shampoo{}) = 0
+calculateSoap (Soap{}) = 100
+calculateSoap (ShowerGel{}) = 50
+calculateSoap (Mixture product1 product2 ratio) = undefined
+    -- (calculateSoap product1) (calculateSoap product2)
+
+-- type Weight = Int
+
+-- data Weight' = MkWeight Int
+-- newtype: keine Laufzeitkosten, da gleiche Repräsentation wie Int
+newtype Weight' = MkWeight Int
+
+-- ganz typsicher, aber umständlich
+-- data Nat = Zero | Succ Nat
+-- three :: Nat
+-- three = Succ (Succ (Succ Zero))
+
+add2ToWeight :: Weight' -> Weight'
+add2ToWeight (MkWeight weight) = MkWeight (weight + 2)
+
+data ListOfInteger =
+    -- die leere Liste
+    Empty
+    -- Cons-Liste aus erstem Element und Rest-Liste
+    | Cons Integer ListOfInteger
+    deriving Show
+
+-- >>> list1
+-- Cons 3 (Cons 5 Empty)
+list1 = Cons 3 (Cons 5 Empty)
+
+-- natürlich eingebaut
+-- [a] :: Liste mit Inhaltstyp a
+list2 :: [Integer]
+list2 = [2,3,4]
+
+-- : ist Cons (Konstruktor)
+-- >>> 2 : 3 : 4 : []
+-- [2,3,4]
+-- >>> [] :: [String]
+-- []
+
+listSum :: [Integer] -> Integer
+listSum [] = 0
+--       v erstes Element
+--            v Rest-Liste
+listSum (x : xs) = x + listSum xs
+
+listFold :: acc -> (a -> acc -> acc) -> [a] -> acc
+listFold neutral op [] = neutral
+--                              `` um Funktion -> Infix
+listFold neutral op (x : xs) = x `op` (listFold neutral op xs)
+-- >>> listFold 0 (+) [1,2,3]
+-- 6
+-- >>> listFold [] (:) [1,2,3,4]
+-- [1,2,3,4]
+
+-- lazy evaluation
+-- strikte Auswertung (Racket):
+-- - bei Funktionsaufruf werden erst Argumente ausgewertet
+-- - hier: Argumente werden erst dann ausgewertet, wenn sie benötigt werden
+
+natsFrom :: Integer -> [Integer]
+natsFrom n = n : natsFrom (n + 1)
+
+-- Vielfache einer Zahl aus Liste streichen
+strikeMultiples :: Integer -> [Integer] -> [Integer]
+-- gestern: extract. Haskell: filter
+strikeMultiples n xs =
+    filter (\ m -> mod m n /= 0) xs
+
+-- Sieb des Eratosthenes
+sieve :: [Integer] -> [Integer]
+sieve [] = []
+sieve (x : xs) = x : (sieve (strikeMultiples x xs))
+
+-- >>> head [1,2]
+-- 1
+-- >>> head []
+-- Prelude.head: empty list
+
+-- Algebraischer Datentyp mit Typvariable
+-- "polymorph"
+data Optional a
+    = Result a
+    | Null
+    deriving Show
+
+listIndex :: Integer -> [a] -> Optional a
+listIndex _ [] = Null
+listIndex n (x : xs) =
+    if n == 0 then Result x else listIndex (n - 1) xs
+-- >>> listIndex 2 []
+-- Null
+-- >>> listIndex 2 ["a", "b", "c"]
+-- Result "c"
+
+-- type String = [Char]
+appendFooToFirstElement :: [String] -> Optional [String]
+appendFooToFirstElement [] = Null
+appendFooToFirstElement xs =
+    -- lokale Variablen: let ... in ...
+    let firstElement = listIndex 0 xs in
+    case firstElement of
+        Null -> Null
+        Result x -> Result ((x ++ "foo") : tail xs)
