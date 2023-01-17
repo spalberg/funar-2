@@ -322,8 +322,8 @@ instance Show Foo where
 -- Typklassen machen es möglich, die Domäne von polymorphen Funktionen
 -- einzuschränken
 
-foo :: Show a => a -> String
-foo a = show a
+showIfEqual :: (Eq a, Show a) => a -> a -> String
+showIfEqual a x = if a == x then show x else ""
 
 {-
 
