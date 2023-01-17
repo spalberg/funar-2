@@ -313,4 +313,4 @@ data Foo = Foo String
 instance Show Foo where
     -- show :: Show a => a -> String
     show :: Foo -> String
-    show (Foo s) = s
+    show (Foo s) = "SHOWING: " ++ s
