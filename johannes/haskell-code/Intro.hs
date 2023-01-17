@@ -405,3 +405,7 @@ instance Semigroup a => Semigroup (Optional a) where
 instance Semigroup a => Monoid (Optional a) where
     neutral :: Optional a
     neutral = Null -- Null `op` (Result neutral) == Null
+
+fromOptional :: Optional a -> [a]
+fromOptional (Result a) = [a]
+fromOptional Null = []
