@@ -3,6 +3,8 @@
 -- explizite Exportliste
 module Intro (x, f, Weight', Animal(..), makeWeight) where
 
+import Prelude hiding (Semigroup, Monoid)
+
 -- import Prelude hiding (Semigroup, Monoid)
 
 x :: Integer
@@ -349,4 +351,8 @@ Halbgruppe:
 -}
 
 class Semigroup a where
+    -- muss gelten: Assoziativgesetz
     op :: a -> a -> a
+
+instance Semigroup String where
+    op s1 s2 = s1 ++ s2
