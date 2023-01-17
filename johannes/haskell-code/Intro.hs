@@ -403,4 +403,4 @@ instance Semigroup a => Semigroup (Optional a) where
 
 instance Monoid a => Monoid (Optional a) where
     neutral :: Optional a
-    neutral = Result neutral
+    neutral = Null -- Null `op` (Result neutral) == Null
