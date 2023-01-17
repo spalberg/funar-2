@@ -400,3 +400,7 @@ instance Semigroup a => Semigroup (Optional a) where
     op Null x = x
     op y Null = y
     op (Result x) (Result y) = Result (op x y)
+
+instance Monoid a => Monoid (Optional a) where
+    neutral :: Optional a
+    neutral = Result neutral
