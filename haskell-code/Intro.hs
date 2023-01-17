@@ -98,4 +98,74 @@ tuplify f = \(a, b) -> f a b
 -- - Mixtur aus zwei Duschprodukten, bel. Anteile
 -- Funktion entsprechend anpassen
 
-data WGT = MkWGT Integer
+-- -----
+
+data Optional a
+  = Result a
+  | Null
+  deriving (Show)
+
+class Semigroup a where
+  -- muss gelten: Assoziativgesetz
+  op :: a -> a -> a
+
+-- String ist Synonym für [Char]
+-- Listen bilden eine Halbgruppe
+instance Semigroup [a] where
+  op s1 s2 = s1 ++ s2
+
+instance Semigroup Int where
+  op = (+)
+
+-- >>> op (2 :: Int) 3
+-- 5
+-- >>> op "abc" "def"
+-- "abcdef"
+
+-- Haskell hat mehrere Stringtypen
+-- String, Text, LazyText, ByteString, Lazy ByteString
+-- foo :: Text -> Text -> Text
+-- bei Verwendung von `op` -> refactoringsicher
+-- foo s t = s `op` t `op` "abc"
+
+-- Monoid ist Spezialisierung von Semigroup
+class Semigroup a => Monoid a where
+  --  muss gelten: Neutralität von neutral
+  -- op neutral x == x == op x neutral f.a. x
+  neutral :: a
+
+instance Monoid [a] where
+  neutral = []
+
+-- Tupel: (a, b)
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+  op :: (Semigroup a, Semigroup b) => (a, b) -> (a, b) -> (a, b)
+  op (x, y) (a, b) = (x `op` a, y `op` b)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+  neutral = (neutral, neutral)
+
+-- Übung:
+-- Instanzen
+-- - Semigroup (Optional a)
+-- - Monoid (Optional a)
+
+instance Semigroup a => Semigroup (Optional a) where
+  op Null _ = Null
+  op _ Null = Null
+  op (Result r1) (Result r2) = Result (op r1 r2)
+
+-- >>> op (Result (2 :: Int)) (Result 4)
+-- Result 6
+
+-- >>> op (Result (2 :: Int)) Null
+-- Null
+
+instance Monoid a => Monoid (Optional a) where
+  neutral = Result neutral
+
+-- >>> op (Result [1,2,3]) neutral
+-- Result [1,2,3]
+
+-- >>> op neutral (Result [1,2,3])
+-- Result [1,2,3]
