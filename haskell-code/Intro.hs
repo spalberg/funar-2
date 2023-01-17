@@ -66,14 +66,16 @@ parrot1 = MkParrot "Hello" 3
 
 parrot2 = MkParrot "Bye" 1
 
+parrot3 = MkParrot "Bye" 4
+
 -- Tiere überfahren
 runOverAnimal :: Animal -> Animal
 runOverAnimal (MkDillo _ weight) = MkDillo Dead weight
 runOverAnimal (MkParrot _ weight) = MkParrot "" weight
 
 -- Tiere füttern
--- >>> feedAnimal (MkDillo Alive 2) 10
--- MkDillo {dilloLiveness = Alive, dilloWeight = 12}
+-- >>> feedAnimal (MkDillo Alive 2) 12
+-- MkDillo {dilloLiveness = Alive, dilloWeight = 14}
 feedAnimal :: Animal -> Weight -> Animal
 feedAnimal dillo@(MkDillo liveness weight) amount =
   case liveness of
@@ -83,6 +85,15 @@ feedAnimal (MkParrot sentence weight) amount = MkParrot sentence (weight + amoun
 
 -- tuplify
 tuplify :: (a -> b -> c) -> ((a, b) -> c)
-tuplify f = \ (a, b) -> f a b
+tuplify f = \(a, b) -> f a b
 
--- Duschprodukt
+-- Duschprodukte:
+-- - Seife mit ph-Wert
+-- - Shampoo mit Haartyp
+-- - Duschgel (50% Seife, 50% Shampoo)
+
+-- 1. Datenanalyse + Datentyp
+-- 2. Funktion, die den Seifenanteil berechnet
+-- 3. Erweiterung:
+-- - Mixtur aus zwei Duschprodukten, bel. Anteile
+-- Funktion entsprechend anpassen
