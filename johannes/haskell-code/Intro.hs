@@ -366,3 +366,8 @@ instance Semigroup Int where
 -- 5
 -- >>> op "abc" "def"
 -- "abcdef"
+
+-- Haskell hat mehrere Stringtypen
+-- String, Text, LazyText, ByteString, Lazy ByteString
+foo :: String -> String -> String
+foo s t = s ++ t ++ "abc"
