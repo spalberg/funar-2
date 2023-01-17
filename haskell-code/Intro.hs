@@ -97,3 +97,5 @@ tuplify f = \(a, b) -> f a b
 -- 3. Erweiterung:
 -- - Mixtur aus zwei Duschprodukten, bel. Anteile
 -- Funktion entsprechend anpassen
+
+data WGT = MkWGT Integer
