@@ -389,3 +389,8 @@ instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
 
 instance (Monoid a, Monoid b) => Monoid (a, b) where
     neutral = (neutral, neutral)
+
+-- Übung:
+-- Instanzen
+-- - Semigroup (Optional a)
+-- - Monoid (Optional a)
