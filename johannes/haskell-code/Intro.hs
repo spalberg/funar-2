@@ -412,3 +412,5 @@ fromOptional Null = []
 
 -- Optional ist eingebaut:
 -- data Maybe = Just a | Nothing
+
+-- TODO: optionalMap
