@@ -372,3 +372,6 @@ instance Semigroup Int where
 -- foo :: Text -> Text -> Text
 -- bei Verwendung von `op` -> refactoringsicher
 -- foo s t = s `op` t `op` "abc"
+
+-- Monoid ist Spezialisierung von Semigroup
+class Semigroup a => Monoid a where
