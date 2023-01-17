@@ -381,3 +381,7 @@ class Semigroup a => Monoid a where
 
 instance Monoid [a] where
     neutral = []
+
+-- Tupel: (a, b)
+instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
+    op (x, y) (a, b) = (x `op` a, y `op` b)
