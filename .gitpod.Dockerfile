@@ -35,6 +35,8 @@ RUN . /home/gitpod/.nix-profile/etc/profile.d/nix.sh \
   && nix-env -i direnv \
   && direnv hook bash >> /home/gitpod/.bashrc
 
+ENV PATH=/home/gitpod/.nix-profile/bin:$PATH
+
 # Speed up build by caching
 COPY nix nix
 RUN . /home/gitpod/.nix-profile/etc/profile.d/nix.sh \
