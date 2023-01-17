@@ -409,3 +409,6 @@ instance Semigroup a => Monoid (Optional a) where
 fromOptional :: Optional a -> [a]
 fromOptional (Result a) = [a]
 fromOptional Null = []
+
+-- Optional ist eingebaut:
+-- data Maybe = Just a | Nothing
