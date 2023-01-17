@@ -361,3 +361,8 @@ instance Semigroup [a] where
 
 instance Semigroup Int where
     op = (+)
+
+-- >>> op (2 :: Int) 3
+-- 5
+-- >>> op "abc" "def"
+-- "abcdef"
