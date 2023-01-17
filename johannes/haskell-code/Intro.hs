@@ -355,5 +355,9 @@ class Semigroup a where
     op :: a -> a -> a
 
 -- String ist Synonym für [Char]
+-- Listen bilden eine Halbgruppe
 instance Semigroup [a] where
     op s1 s2 = s1 ++ s2
+
+instance Semigroup Int where
+    op a b = a + b
