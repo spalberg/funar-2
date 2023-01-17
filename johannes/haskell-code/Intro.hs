@@ -1,7 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 -- explizite Exportliste
-module Intro (x, f, Weight', Animal(..)) where
+module Intro (x, f, Weight', Animal(..), makeWeight) where
 
 -- import Prelude hiding (Semigroup, Monoid)
 
@@ -301,3 +301,6 @@ appendFooToFirstElement xs =
 
 -- wollen auf dem Typlevel _sehen_ können, ob und wie eine
 -- Funktion fehlschlagen kann
+
+-- class Eq a where
+--     (==) :: a -> a -> Bool
