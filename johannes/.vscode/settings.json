@@ -1,0 +1,16 @@
+{
+  "haskell.manageHLS": "PATH",
+  "extensions.ignoreRecommendations": true,
+  "haskell.plugin.hlint.diagnosticsOn": false,
+  "terminal.integrated.profiles.linux": {
+    "nix-shell": {
+      "path": "nix-shell",
+      "icon": "terminal-linux"
+    },
+    "bash": {
+      "path": "/bin/bash",
+      "icon": "terminal-linux"
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "nix-shell"
+}
