@@ -314,3 +314,21 @@ instance Show Foo where
     -- show :: Show a => a -> String
     show :: Foo -> String
     show (Foo s) = "SHOWING: " ++ s
+
+-- Wann sollte man Typklassen implementieren/bauen?
+-- -> Typklassen sind zuständig für universelle Abstraktionen!
+-- Bisher: Show, Eq, Ord (totale Ordnungen)
+
+-- Typklassen machen es möglich, die Domäne von polymorphen Funktionen
+-- einzuschränken
+
+foo :: Show a => a -> String
+foo a = show a
+
+{-
+
+Algebra:
+- Typ T
+- Operationen mit Signaturen
+
+-}
