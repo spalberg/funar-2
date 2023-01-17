@@ -105,6 +105,11 @@ data Optional a
   | Null
   deriving (Show)
 
+data Optional2 a
+  = Result2 a
+  | Null2
+  deriving (Show)
+
 class Semigroup a where
   -- muss gelten: Assoziativgesetz
   op :: a -> a -> a
@@ -169,3 +174,23 @@ instance Monoid a => Monoid (Optional a) where
 
 -- >>> op neutral (Result [1,2,3])
 -- Result [1,2,3]
+
+instance Semigroup a => Semigroup (Optional2 a) where
+  op (Result2 r1) (Result2 r2) = Result2 (op r1 r2)
+  op Null2 o = o
+  op o Null2 = o
+
+-- >>> op (Result2 (2 :: Int)) (Result2 4)
+-- Result2 6
+
+-- >>> op (Result2 (2 :: Int)) Null2
+-- Result2 2
+
+instance Semigroup a => Monoid (Optional2 a) where
+  neutral = Null2
+
+-- >>> op (Result2 [1,2,3]) neutral
+-- Result2 [1,2,3]
+
+-- >>> op neutral (Result2 [1,2,3])
+-- Result2 [1,2,3]
