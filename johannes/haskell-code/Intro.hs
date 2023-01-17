@@ -394,3 +394,9 @@ instance (Monoid a, Monoid b) => Monoid (a, b) where
 -- Instanzen
 -- - Semigroup (Optional a)
 -- - Monoid (Optional a)
+
+instance Semigroup a => Semigroup (Optional a) where
+    op :: Optional a -> Optional a -> Optional a
+    op Null x = x
+    op y Null = y
+    op (Result x) (Result y) = Result (op x y)
