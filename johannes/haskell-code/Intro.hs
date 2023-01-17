@@ -304,4 +304,12 @@ appendFooToFirstElement xs =
 
 -- Typklasse (denk: Interface)
 -- class Eq a where
+--     Methode:
 --     (==) :: a -> a -> Bool
+
+-- Implementierung / Instanz:
+data Foo = Foo String
+
+instance Show Foo where
+    show :: Show a => a -> String
+    show (Foo s) = s
