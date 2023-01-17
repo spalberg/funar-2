@@ -343,5 +343,7 @@ Plus:
 Halbgruppe:
 - binäre Operation: op :: a -> a -> a
 - assoziativ: op (op a b) c == op a (op b c)
+- assoziativ: (a `op` b) `op` c == a `op` (b `op` c)
+- jetzt sinnvoll: a `op` b `op` c
 
 -}
