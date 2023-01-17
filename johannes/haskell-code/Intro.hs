@@ -197,6 +197,9 @@ calculateSoap (Mixture product1 product2 ratio) = undefined
 -- newtype: keine Laufzeitkosten, da gleiche Repräsentation wie Int
 newtype Weight' = MkWeight Int
 
+makeWeight :: Int -> Optional Weight'
+makeWeight x = if x < 0 then Null else Result (MkWeight x)
+
 -- ganz typsicher, aber umständlich
 -- data Nat = Zero | Succ Nat
 -- three :: Nat
@@ -295,4 +298,5 @@ appendFooToFirstElement xs =
 -- Matthias: map :: (a -> b) -> [a] -> [b]
 -- Praxis: map (7*) daten
 
--- wollen unterscheiden können, ob 
+-- wollen auf dem Typlevel _sehen_ können, ob und wie eine
+-- Funktion fehlschlagen kann
