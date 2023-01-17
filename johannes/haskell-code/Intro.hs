@@ -375,3 +375,6 @@ instance Semigroup Int where
 
 -- Monoid ist Spezialisierung von Semigroup
 class Semigroup a => Monoid a where
+    --  muss gelten: Neutralität von neutral
+    -- op neutral x == x == op x neutral f.a. x
+    neutral :: a
