@@ -1,6 +1,7 @@
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module Intro where
+-- explizite Exportliste
+module Intro (x, f, Weight', Animal(..)) where
 
 -- import Prelude hiding (Semigroup, Monoid)
 
