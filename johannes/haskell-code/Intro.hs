@@ -386,3 +386,6 @@ instance Monoid [a] where
 instance (Semigroup a, Semigroup b) => Semigroup (a, b) where
     op :: (Semigroup a, Semigroup b) => (a, b) -> (a, b) -> (a, b)
     op (x, y) (a, b) = (x `op` a, y `op` b)
+
+instance (Monoid a, Monoid b) => Monoid (a, b) where
+    neutral = (neutral, neutral)
