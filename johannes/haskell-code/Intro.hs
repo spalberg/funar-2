@@ -369,5 +369,6 @@ instance Semigroup Int where
 
 -- Haskell hat mehrere Stringtypen
 -- String, Text, LazyText, ByteString, Lazy ByteString
-foo :: String -> String -> String
-foo s t = s ++ t ++ "abc"
+foo :: Text -> Text -> Text
+-- bei Verwendung von `op` -> refactoringsicher
+foo s t = s `op` t `op` "abc"
