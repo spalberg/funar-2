@@ -291,3 +291,8 @@ appendFooToFirstElement xs =
     case firstElement of
         Null -> Null
         Result x -> Result ((x ++ "foo") : tail xs)
+
+-- Matthias: map :: (a -> b) -> [a] -> [b]
+-- Praxis: map (7*) daten
+
+-- wollen unterscheiden können, ob 
