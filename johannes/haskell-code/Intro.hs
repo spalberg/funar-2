@@ -347,3 +347,6 @@ Halbgruppe:
 - jetzt sinnvoll: a `op` b `op` c
 
 -}
+
+class Semigroup a where
+    op :: a -> a -> a
