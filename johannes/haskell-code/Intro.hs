@@ -302,5 +302,6 @@ appendFooToFirstElement xs =
 -- wollen auf dem Typlevel _sehen_ können, ob und wie eine
 -- Funktion fehlschlagen kann
 
+-- Typklasse (denk: Interface)
 -- class Eq a where
 --     (==) :: a -> a -> Bool
