@@ -1,4 +1,5 @@
 module Cards where
+import Data.Set (cartesianProduct)
 
 -- Datenmodell für Spielkarten (Farbe + Wert, Suit + Rank)
 -- Datentyp Card: no illegal states
@@ -33,4 +34,11 @@ data Card = MkCard Suit Rank
     deriving (Eq, Show)
 
 allCards :: [Card]
-allCards = [ MkCard suit rank | suit <- allSuits, rank <- allRanks ]
+allCards = -- [ MkCard suit rank | suit <- allSuits, rank <- allRanks ] -- list comprehension
+    cartesianProduct allSuits allRanks
+
+cartesianProduct :: [a] -> [b] -> [(a, b)]
+cartesianProduct list1 list2 =
+    concat (map (\ el1 -> map (\ el2 -> (el1, el2)) list2) list1)
+    -- concat :: [[a]] -> [a]
+    -- theorems for free (philip wadler)
