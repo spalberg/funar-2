@@ -1,4 +1,5 @@
 {-# LANGUAGE InstanceSigs #-}
+
 module DB where
 
 -- <- Alias
@@ -87,28 +88,41 @@ splice (Put key value cb) f =
   Put key value (\_ -> splice (cb ()) f)
 
 instance Functor DB where
-    fmap :: (a -> b) -> DB a -> DB b
-    fmap f (Return a) = Return (f a)
-    fmap f (Get key cb) = Get key (\ i -> fmap f (cb i))
-    fmap f (Put key value cb) = Put key value (\ _ -> fmap f (cb ()))
+  fmap :: (a -> b) -> DB a -> DB b
+  fmap f (Return a) = Return (f a)
+  fmap f (Get key cb) = Get key (\i -> fmap f (cb i))
+  fmap f (Put key value cb) = Put key value (\_ -> fmap f (cb ()))
 
-instance Applicative DB where
-    
+instance Applicative DB
+
 instance Monad DB where
-    return :: a -> DB a
-    return = Return
-    (>>=) :: DB a -> (a -> DB b) -> DB b
-    (>>=) = splice
+  return :: a -> DB a
+  return = Return
+  (>>=) :: DB a -> (a -> DB b) -> DB b
+  (>>=) = splice
 
 p1' :: DB String
-p1' = splice (put "Sven" 27) (\ _ -> 
-      splice (get "Sven") (\ x -> 
-      splice (put "Sven" (x + 1)) (\ _ -> 
-      splice (get "Sven") (\y -> 
-      Return (show (x + y))))))
+p1' =
+  splice
+    (put "Sven" 27)
+    ( \_ ->
+        splice
+          (get "Sven")
+          ( \x ->
+              splice
+                (put "Sven" (x + 1))
+                ( \_ ->
+                    splice
+                      (get "Sven")
+                      ( \y ->
+                          Return (show (x + y))
+                      )
+                )
+          )
+    )
 
 p1'' :: DB String
-p1'' = do 
+p1'' = do
   put "Sven" 27
   x <- get "Sven"
   put "Sven" (x + 1)
@@ -117,3 +131,9 @@ p1'' = do
 
 -- >>> runDB Map.empty p1''
 -- ("55",fromList [("Sven",28)])
+
+hello :: IO ()
+hello = do
+  putStrLn "hello world"
+  s <- getLine
+  putStrLn ("du sagtest: " <> s)
