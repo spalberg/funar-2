@@ -289,14 +289,36 @@ listIndex n (x : xs) =
 -- Result "c"
 
 -- type String = [Char]
-appendFooToFirstElement :: [String] -> Optional [String]
-appendFooToFirstElement [] = Null
-appendFooToFirstElement xs =
+appendFooToSecondElement :: [String] -> Optional [String]
+appendFooToSecondElement xs =
     -- lokale Variablen: let ... in ...
-    let firstElement = listIndex 0 xs in
-    case firstElement of
+    let secondElement = listIndex 1 xs in
+    -- case secondElement of
+    --     Null -> Null
+    --     Result x -> --Result ((x ++ "foo") : tail xs)
+    --       let updated = x ++ "foo" in
+    --       Result (take 1 xs ++ [updated] ++ drop 2 xs)
+    fmap 
+        (\ elem ->
+            let updated = elem ++ "foo" in
+            -- closure: haben Zugriff auf xs von "außen"
+            take 1 xs ++ [updated] ++ drop 2 xs)
+        secondElement
+
+optionalMap :: (a -> b) -> Optional a -> Optional b
+optionalMap f opt =
+    case opt of
         Null -> Null
-        Result x -> Result ((x ++ "foo") : tail xs)
+        Result x -> Result (f x)
+
+-- f :: () -> String
+-- f ()
+-- Enumerable.Range(2,17890).Select(x => x + 1).GroupBy(a => ...)
+
+-- >>> appendFooToSecondElement ["a", "b", "c"]
+-- Result ["a","bfoo","c"]
+-- >>> appendFooToSecondElement []
+-- Null
 
 -- Matthias: map :: (a -> b) -> [a] -> [b]
 -- Praxis: map (7*) daten
@@ -411,6 +433,36 @@ fromOptional (Result a) = [a]
 fromOptional Null = []
 
 -- Optional ist eingebaut:
--- data Maybe = Just a | Nothing
+-- data Maybe a = Just a | Nothing
 
--- TODO: optionalMap
+-- TODO: eingebautes Monoid:
+--   class Semigroup a => Monoid a where
+--     mempty :: a
+--     mappend :: a -> a -> a
+--     mappend = (<>)     <- Default-Implementierung ((<>) war `op` bei Semigroup)
+
+-- TODO: zurückkommen zu störenden, dauernden Pattern-Matches bei Optional
+
+-- optionalMap :: (a -> b) -> Optional a -> Optional b
+-- optionalMap f opt =
+--     case opt of
+--         Null -> Null
+--         Result x -> Result (f x)
+
+-- listMap :: (a -> b) -> List a -> List b
+
+-- class Functor f where
+--     --                  v Typkonstruktor
+--     fmap :: (a -> b) -> f a -> f b
+
+-- ein Funktor erzeugt Typen, über die man mappen kann
+-- angenehmerer Name: Mappable
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap = optionalMap
+
+-- instance Functor [] where
+--     fmap = listMap
+
+    -- Optional ist quasi Funktion auf Typebene:
+    -- gegeben String, bekommen (Optional String)
