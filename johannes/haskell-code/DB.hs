@@ -49,3 +49,8 @@ p1 = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ y ->
      Return (show (x + y))))))
 
+-- Baustein, mit dem wir Ablauf zusammenbauen wollen
+-- wie im Beispiel oben
+-- -> _ist_ ein simples DB-Programm
+get :: String -> DB Integer
+get key = Get key undefined
