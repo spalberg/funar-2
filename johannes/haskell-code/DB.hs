@@ -19,5 +19,7 @@ data DBCommand =
     | Return String
     deriving Show
 
--- >>> Get "johannes"
--- No instance for (Show DBCommand) arising from a use of ‘evalPrint’
+-- >>> :t Get "johannes"
+-- Get "johannes" :: DBCommand
+
+type DBProgram = [DBCommand]
