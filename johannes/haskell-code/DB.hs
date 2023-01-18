@@ -60,3 +60,6 @@ get key = Get key Return -- (Return :: Integer -> DB Integer)
 -- quasi void als Ergebnis
 put :: String -> Integer -> DB ()
 put key value = Put key value Return
+
+return :: a -> DB a
+return = Return
