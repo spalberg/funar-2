@@ -132,4 +132,14 @@ splice (Get key callback) f =
 splice (Put key value callback) f =
     Put key value (\ _ ->
         splice (callback ()) f)
+-- Return wird ersetzt durch das NEUE Restprogramm, aka f a
 splice (Return a) f = f a
+
+
+-- class Functor f where
+--     fmap :: (a -> b) -> f a -> f b
+
+-- Übung: Funktorinstanz für DB
+
+instance Functor DB where
+    fmap :: (a -> b) -> DB a -> DB b
