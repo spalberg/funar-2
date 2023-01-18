@@ -189,10 +189,28 @@ p1'' = splice (put "Johannes" 36) (\ () ->
        splice (get "Johannes") (\ y ->
        Return (show (x + y))))))
 
+p1''alternativ :: DB String
+p1''alternativ =
+    put "Johannes" 36 >>= (\ () ->
+    get "Johannes" >>= (\ x ->
+    put "Johannes" (x+1) >>= (\ _ ->
+    get "Johannes" >>= (\ y ->
+    Return (show (x + y))))))
+
 -- monadische Syntax / do-Notation
 p1''' :: DB String
-p1''' = do put "Johannes" 36
-           x <- get "Johannes"
-           put "Johannes" (x + 1)
-           y <- get "Johannes"
-           return (show (x+y))
+p1''' = do
+  put "Johannes" 36
+  x <- get "Johannes"
+  foo <- p1''alternativ
+  put "Johannes" (x + 1)
+  y <- get "Johannes"
+  return (show (x+y))
+
+-- Hello world
+hello :: IO ()
+hello = do
+    putStrLn "hello world"
+    putStrLn "foobar"
+    s <- getLine
+    putStrLn ("du sagtest: " <> s)
