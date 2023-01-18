@@ -1,3 +1,4 @@
+{-# LANGUAGE InstanceSigs #-}
 module DB where
 
 import qualified Data.Map as Map -- <- Alias
