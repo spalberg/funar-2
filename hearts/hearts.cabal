@@ -5,6 +5,19 @@ author:              Mike Sperber
 maintainer:          michael.sperber@active-group.de
 
 library
+  exposed-modules:     Cards
+                     , GameEvent
+                     -- , HeartsJson
+                     -- , Json.Decode
+                     -- , Table
+                     -- , TableIO
+                     -- , Sync
+                     -- , Free
+                     -- , Player
+                     -- , Concurrency
+  other-modules:       MVar
+                     , Shuffle
+                     , Teletype
   build-depends:       base
                      , aeson
                      , cond
