@@ -43,4 +43,4 @@ data DB a
     -- deriving Show
 
 p1 :: DB String
-p1 = Put "Johannes" 36 
+p1 = Put "Johannes" 36 undefined
