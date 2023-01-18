@@ -90,5 +90,5 @@ return = Return
 runDB :: Map String Integer -> DB a -> a
 runDB mp (Get key callback) =
     let value = mp ! key in
-        runDB mp _
+        runDB mp _ -- _ ist "typed hole"
 runDB mp _ = undefined
