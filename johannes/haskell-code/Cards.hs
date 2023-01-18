@@ -41,4 +41,4 @@ cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 =
     concat (map (\ el1 -> map (\ el2 -> (el1, el2)) list2) list1)
     -- concat :: [[a]] -> [a]
-    -- theorems for free (philip wadler)
+    -- 'theorems for free' (philip wadler)
