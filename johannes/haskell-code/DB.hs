@@ -53,4 +53,4 @@ p1 = Put "Johannes" 36 (\ _ ->
 -- wie im Beispiel oben
 -- -> _ist_ ein simples DB-Programm
 get :: String -> DB Integer
-get key = Get key (\ i -> Return i)
+get key = Get key Return -- (Return :: Integer -> DB Integer)
