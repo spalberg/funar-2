@@ -103,8 +103,14 @@ runDB mp (Return a) = (a, mp)
 -- >>> runDB Map.empty (put "foo" 1)
 -- ((),fromList [("foo",1)])
 
--- >>> runDB Map.empty (return 3)
--- ((),fromList [("foo",1)])
+-- >>> runDB Map.empty (Return 3)
+-- Ambiguous occurrence ‘return’
+-- It could refer to
+--    either ‘Prelude.return’,
+--           imported from ‘Prelude’ at /home/johannes/ag/funar-2-hhpv/johannes/haskell-code/DB.hs:1:8-9
+--           (and originally defined in ‘GHC.Base’)
+--        or ‘DB.return’,
+--           defined at /home/johannes/ag/funar-2-hhpv/johannes/haskell-code/DB.hs:87:1
 
 --          v Typkonstruktor
 -- class Monad m where
