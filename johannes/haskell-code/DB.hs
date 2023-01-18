@@ -17,3 +17,7 @@ data DBCommand =
     Put String Integer
     | Get String
     | Return String
+    deriving Show
+
+-- >>> Get "johannes"
+-- No instance for (Show DBCommand) arising from a use of ‘evalPrint’
