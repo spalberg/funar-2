@@ -45,6 +45,7 @@ data DB a
 p1 :: DB String
 p1 = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ x ->
+     -- Nariman möchte hier SMS verschicken mit x
      Put "Johannes" (x+1) (\ _ ->
      Get "Johannes" (\ y ->
      Return (show (x + y))))))
