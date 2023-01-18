@@ -1,5 +1,8 @@
 module DB where
 
+import qualified Data.Map as Map -- <- Alias
+import Data.Map (Map, (!))
+
 -- Datenbank: Key-Value-Store
 -- Key: String
 -- Wert: Integer
