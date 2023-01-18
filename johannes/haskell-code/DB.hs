@@ -144,4 +144,8 @@ splice (Return a) f = f a
 
 instance Functor DB where
     -- fmap :: (a -> b) -> DB a -> DB b
-    fmap = undefined
+    fmap f db = case db of
+      Get key callback ->
+        Get key (\ i -> fmap f (callback i))
+      Put key value callback -> _
+      Return a -> Return (f a)
