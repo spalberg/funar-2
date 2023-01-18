@@ -17,3 +17,7 @@ data Suit = Diamonds | Hearts | Spades | Clubs
 data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
          | Jack | Queen | King | Ace
   deriving (Show, Eq, Ord, Enum)
+
+-- suitFromIndex :: Int -> Suit
+
+-- map suitFromIndex [0..3]
