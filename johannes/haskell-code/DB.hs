@@ -42,6 +42,16 @@ data DB a
     | Return a
     -- deriving Show
 
+class IDB m where
+    get :: String -> m Integer
+    put :: String -> Integer -> m ()
+    return :: a -> m a
+
+class ISendSms m where
+    send :: String -> PhoneNumber -> m ()
+
+p1WithSms :: (IDB m, ISendSms m) => m String
+
 p1 :: DB String
 p1 = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ x ->
