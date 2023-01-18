@@ -1,7 +1,9 @@
 module DB where
 
 import qualified Data.Map as Map -- <- Alias
-import Data.Map (Map, (!))
+-- müssen schreiben: Map.insert ...
+-- ab und an nervt: m Map.! "johannes"
+import Data.Map (Map, (!)) -- <- alles 
 
 -- Datenbank: Key-Value-Store
 -- Key: String
@@ -86,4 +88,4 @@ return = Return
 
 -- wir wollen den Ablauf bzw. das Programm _interpretieren_
 runDB :: Map String Integer -> DB a -> a
-runDB = undefined
+runDB mp = undefined
