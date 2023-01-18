@@ -114,3 +114,13 @@ runDB mp (Return a) = (a, mp)
 
 -- Datenbankprogramme verbinden
 splice :: DB a -> (a -> DB b) -> DB b
+splice (Return a) f = f a
+splice (Get key callback) f =
+    -- Alle Puzzleteile:
+    -- callback :: Integer -> DB a
+    -- f :: a -> DB b
+    -- key :: String
+    -- get key :: DB Integer
+    -- splice :: DB a -> (a -> DB b) -> DB b
+    
+splice _ _ = undefined
