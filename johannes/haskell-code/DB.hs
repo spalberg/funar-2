@@ -56,3 +56,7 @@ p1 = Put "Johannes" 36 (\ _ ->
 -- -> _ist_ ein simples DB-Programm
 get :: String -> DB Integer
 get key = Get key Return -- (Return :: Integer -> DB Integer)
+
+-- quasi void als Ergebnis
+put :: String -> Integer -> DB ()
+put key value = Put key value Return
