@@ -112,3 +112,5 @@ runDB mp (Return a) = (a, mp)
 --     -- bind / flatMap
 --     (>>=) :: m a -> (a -> m b) -> m b
 
+-- Datenbankprogramme verbinden
+splice :: DB a -> (a -> DB b) -> DB b
