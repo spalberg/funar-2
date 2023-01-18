@@ -122,5 +122,9 @@ splice (Get key callback) f =
     -- key :: String
     -- get key :: DB Integer
     -- splice :: DB a -> (a -> DB b) -> DB b
+    -- ???
+
+    -- brauchen hier: _ein konkretes_ DB b
+    -- Michael: woher kriegt man den Integer?
     
 splice _ _ = undefined
