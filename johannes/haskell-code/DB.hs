@@ -85,6 +85,9 @@ p1' = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ y ->
      Return (x + y)))))
 
+p1'AsString :: DB String
+p1'AsString = fmap show p1'
+
 -- Wunsch: DB a -> a
 
 -- Baustein, mit dem wir Ablauf zusammenbauen wollen
