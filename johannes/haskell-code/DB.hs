@@ -148,5 +148,5 @@ instance Functor DB where
       Get key callback ->
         Get key (\ i -> fmap f (callback i))
       Put key value callback ->
-        Get key (\ _ -> fmap f (callback ()))
+        Put key value (\ _ -> fmap f (callback ()))
       Return a -> Return (f a)
