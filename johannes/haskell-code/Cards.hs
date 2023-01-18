@@ -30,6 +30,7 @@ allRanks :: [Rank]
 allRanks = [minBound .. maxBound]
 
 data Card = MkCard Suit Rank
+    deriving (Eq, Show)
 
 allCards :: [Card]
 allCards = [ MkCard suit rank | suit <- allSuits, rank <- allRanks ]
