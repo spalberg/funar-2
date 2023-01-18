@@ -12,11 +12,11 @@ module Cards where
 -- cardBeats :: Card -> Card -> ???
 
 data Suit = Diamonds | Hearts | Spades | Clubs
-  deriving (Show, Eq, Ord, Enum)
+  deriving (Show, Eq, Ord, Enum, Bounded)
 
 data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
          | Jack | Queen | King | Ace
-  deriving (Show, Eq, Ord, Enum)
+  deriving (Show, Eq, Ord, Enum, Bounded)
 
 -- suitFromIndex :: Int -> Suit
 
