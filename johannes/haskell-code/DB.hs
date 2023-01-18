@@ -43,8 +43,9 @@ data DB a
     -- deriving Show
 
 p1 :: DB String
-p1 = Put "Johannes" 36 (\ () ->
+p1 = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ x ->
-     Put "Johannes" (x+1) (\ () ->
+     Put "Johannes" (x+1) (\ _ ->
      Get "Johannes" (\ y ->
      Return (show (x + y))))))
+
