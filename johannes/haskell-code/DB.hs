@@ -33,7 +33,7 @@ module DB where
 -- -> führt noch nicht zum Ziel
 
 
-data DBCommand a
+data DB a
     -- Idee: Callback, um Programm fortzusetzen
     -- Was ist, wenn wir nichts finden?
     = Get String (Integer -> b)
