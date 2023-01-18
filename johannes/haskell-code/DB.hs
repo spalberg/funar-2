@@ -128,5 +128,5 @@ splice (Get key callback) f =
 
     -- brauchen hier: _ein konkretes_ DB b
     -- Michael: woher kriegt man den Integer?
-    Get key (\ i -> callback i)
+    Get key (\ i -> splice (callback i) f)
 splice _ _ = undefined
