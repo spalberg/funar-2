@@ -1,5 +1,4 @@
 module Cards where
-import Data.Set (cartesianProduct)
 
 -- Datenmodell für Spielkarten (Farbe + Wert, Suit + Rank)
 -- Datentyp Card: no illegal states
