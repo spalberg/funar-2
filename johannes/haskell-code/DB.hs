@@ -51,6 +51,7 @@ class ISendSms m where
     send :: String -> PhoneNumber -> m ()
 
 p1WithSms :: (IDB m, ISendSms m) => m String
+p1WithSms = ... -- hier kann ich ISendSms und IDB gleichzeitig verwenden
 
 p1 :: DB String
 p1 = Put "Johannes" 36 (\ _ ->
