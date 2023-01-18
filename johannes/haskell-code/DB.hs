@@ -87,7 +87,7 @@ return :: a -> DB a
 return = Return
 
 -- wir wollen den Ablauf bzw. das Programm _interpretieren_
-runDB :: Map String Integer -> DB a -> a
+runDB :: Map String Integer -> DB a -> (a, Map String Integer)
 runDB mp (Get key callback) =
     let value = mp ! key 
         -- foo = "abc"
@@ -95,4 +95,7 @@ runDB mp (Get key callback) =
 runDB mp (Put key value callback) =
     let updatedMap = Map.insert key value mp
     in runDB updatedMap (callback ())
-runDB mp (Return a) = a
+runDB mp (Return a) = (a, mp)
+
+-- >>> runDB Map.empty p1
+-- "73"
