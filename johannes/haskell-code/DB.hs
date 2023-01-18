@@ -22,4 +22,5 @@ data DBCommand =
 -- >>> :t Get "johannes"
 -- Get "johannes" :: DBCommand
 
+-- DB-Programm ist Liste/Abfolge von Commands
 type DBProgram = [DBCommand]
