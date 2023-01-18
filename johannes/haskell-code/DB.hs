@@ -168,6 +168,7 @@ instance Functor DB where
         Put key value (\ _ -> fmap f (callback ()))
       Return a -> Return (f a)
 
+-- Dummy-Implementierung
 instance Applicative DB where
 
 instance Monad DB where
