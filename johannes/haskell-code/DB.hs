@@ -147,5 +147,6 @@ instance Functor DB where
     fmap f db = case db of
       Get key callback ->
         Get key (\ i -> fmap f (callback i))
-      Put key value callback -> _
+      Put key value callback ->
+        Get key (\ _ -> fmap f (callback ()))
       Return a -> Return (f a)
