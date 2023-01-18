@@ -114,7 +114,6 @@ runDB mp (Return a) = (a, mp)
 
 -- Datenbankprogramme verbinden
 splice :: DB a -> (a -> DB b) -> DB b
-splice (Return a) f = f a
 splice (Get key callback) f =
     -- Alle Puzzleteile:
     -- callback :: Integer -> DB a
@@ -133,3 +132,4 @@ splice (Get key callback) f =
 splice (Put key value callback) f =
     Put key value (\ _ ->
         splice (callback ()) f)
+splice (Return a) f = f a
