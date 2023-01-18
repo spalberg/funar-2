@@ -143,3 +143,4 @@ splice (Return a) f = f a
 
 instance Functor DB where
     fmap :: (a -> b) -> DB a -> DB b
+    fmap = undefined
