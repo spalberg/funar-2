@@ -180,12 +180,6 @@ instance Monad DB where
 p1'' :: DB String
 -- p1'' = Put "Johannes" 36 (\ _ ->
 --      Get "Johannes" (\ x ->
---      -- Nariman möchte hier SMS verschicken mit x
---      -- TODO: algebraische Effekte
---      -- - Monaden
---      -- - MonadenTransformatoren
---      -- - Freie Monaden
---      -- - Tagless Final / mtl-Stil
 --      Put "Johannes" (x+1) (\ _ ->
 --      Get "Johannes" (\ y ->
 --      Return (show (x + y))))))
@@ -194,3 +188,11 @@ p1'' = splice (put "Johannes" 36) (\ () ->
        splice (put "Johannes" (x+1)) (\ _ ->
        splice (get "Johannes") (\ y ->
        Return (show (x + y))))))
+
+-- monadische Syntax / do-Notation
+p1''' :: DB String
+p1''' = do put "Johannes" 36
+           x <- get "Johannes"
+           put "Johannes" (x + 1)
+           y <- get "Johannes"
+           return (show (x+y))
