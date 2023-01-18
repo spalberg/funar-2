@@ -34,7 +34,7 @@ data Card = MkCard Suit Rank
 
 allCards :: [Card]
 allCards = -- [ MkCard suit rank | suit <- allSuits, rank <- allRanks ] -- list comprehension
-    fmap MkCard (cartesianProduct allSuits allRanks)
+    fmap (uncurry MkCard) (cartesianProduct allSuits allRanks)
 
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 =
