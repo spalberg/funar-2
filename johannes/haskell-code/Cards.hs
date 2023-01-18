@@ -21,3 +21,7 @@ data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
 -- suitFromIndex :: Int -> Suit
 
 -- map suitFromIndex [0..3]
+
+-- mit Enum und Bounded:
+allSuits :: [Suit]
+allSuits = [minBound .. maxBound]
