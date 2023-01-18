@@ -25,3 +25,6 @@ data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
 -- mit Enum und Bounded:
 allSuits :: [Suit]
 allSuits = [minBound .. maxBound]
+
+allRanks :: [Rank]
+allRanks = [minBound .. maxBound]
