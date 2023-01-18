@@ -28,3 +28,8 @@ allSuits = [minBound .. maxBound]
 
 allRanks :: [Rank]
 allRanks = [minBound .. maxBound]
+
+data Card = MkCard Suit Rank
+
+allCards :: [Card]
+allCards = [ MkCard suit rank | suit <- allSuits, rank <- allRanks ]
