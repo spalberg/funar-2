@@ -85,6 +85,7 @@ p1' = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ y ->
      Return (x + y)))))
 
+-- Idee: show oben rausziehen
 p1'AsString :: DB String
 p1'AsString = fmap show p1'
 
