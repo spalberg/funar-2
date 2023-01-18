@@ -10,3 +10,10 @@ module Cards where
 -- Funktion, die prüft, ob eine Karte eine andere schlägt
 -- (Gedanken über Rückgabewert)
 -- cardBeats :: Card -> Card -> ???
+
+data Suit = Diamonds | Hearts | Spades | Clubs
+  deriving (Show, Eq, Ord)
+
+data Rank = Two | Three | Four | Five | Six | Seven | Eight | Nine | Ten
+         | Jack | Queen | King | Ace
+  deriving (Show, Eq, Ord)
