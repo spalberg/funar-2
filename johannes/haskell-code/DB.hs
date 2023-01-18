@@ -24,3 +24,8 @@ data DBCommand =
 
 -- DB-Programm ist Liste/Abfolge von Commands
 type DBProgram = [DBCommand]
+
+p1 = [ Put "Johannes" 36
+     , Get "Johannes" -- wo ist der Rückgabewert? bzw.
+     -- wie gebe ich ihm einen Namen?
+     ]
