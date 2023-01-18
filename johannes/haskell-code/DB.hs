@@ -42,16 +42,16 @@ data DB a
     | Return a
     -- deriving Show
 
-class IDB m where
-    get :: String -> m Integer
-    put :: String -> Integer -> m ()
-    return :: a -> m a
+-- class IDB m where
+--     get :: String -> m Integer
+--     put :: String -> Integer -> m ()
+--     return :: a -> m a
 
-class ISendSms m where
-    send :: String -> PhoneNumber -> m ()
+-- class ISendSms m where
+--     send :: String -> PhoneNumber -> m ()
 
-p1WithSms :: (IDB m, ISendSms m) => m String
-p1WithSms = ... -- hier kann ich ISendSms und IDB gleichzeitig verwenden
+-- p1WithSms :: (IDB m, ISendSms m) => m String
+-- p1WithSms = ... -- hier kann ich ISendSms und IDB gleichzeitig verwenden
 
 p1 :: DB String
 p1 = Put "Johannes" 36 (\ _ ->
@@ -80,3 +80,7 @@ put key value = Put key value Return
 
 return :: a -> DB a
 return = Return
+
+-- wir wollen den Ablauf bzw. das Programm _interpretieren_
+runDB :: Map String Integer -> DB a -> a
+runDB = undefined
