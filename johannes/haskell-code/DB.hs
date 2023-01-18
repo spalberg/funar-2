@@ -13,10 +13,10 @@ module DB where
     return (show (x + y))
 -}
 
-data DBCommand =
+data DBCommand a =
     Put String Integer
     | Get String
-    | Return String
+    | Return a
     deriving Show
 
 -- >>> :t Get "johannes"
