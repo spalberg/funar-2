@@ -101,8 +101,8 @@ get key = Get key Return -- (Return :: Integer -> DB Integer)
 put :: String -> Integer -> DB ()
 put key value = Put key value Return
 
-return :: a -> DB a
-return = Return
+-- return :: a -> DB a
+-- return = Return
 
 -- wir wollen den Ablauf bzw. das Programm _interpretieren_
 runDB :: Map String Integer -> DB a -> (a, Map String Integer)
