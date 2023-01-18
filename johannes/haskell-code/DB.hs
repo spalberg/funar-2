@@ -88,4 +88,6 @@ return = Return
 
 -- wir wollen den Ablauf bzw. das Programm _interpretieren_
 runDB :: Map String Integer -> DB a -> a
-runDB mp = undefined
+runDB mp (Get key callback) =
+    let value = mp ! key in
+        runDB mp undefined
