@@ -98,4 +98,14 @@ runDB mp (Put key value callback) =
 runDB mp (Return a) = (a, mp)
 
 -- >>> runDB Map.empty p1
--- "73"
+-- ("73",fromList [("Johannes",37)])
+
+-- >>> runDB Map.empty (put "foo" 1)
+-- ((),fromList [("foo",1)])
+
+-- >>> runDB Map.empty (return 3)
+-- ((),fromList [("foo",1)])
+
+--          v Typkonstruktor
+-- class Monad m where
+--     return :: a -> m a
