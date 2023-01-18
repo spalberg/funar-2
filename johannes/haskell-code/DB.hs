@@ -89,6 +89,10 @@ return = Return
 -- wir wollen den Ablauf bzw. das Programm _interpretieren_
 runDB :: Map String Integer -> DB a -> a
 runDB mp (Get key callback) =
-    let value = mp ! key in
-        runDB mp (callback value) -- _ ist "typed hole"
-runDB mp _ = undefined
+    let value = mp ! key 
+        -- foo = "abc"
+    in runDB mp (callback value) -- _ ist "typed hole"
+runDB mp (Put key value callback) =
+    let updatedMap = Map.insert key value mp
+    in runDB updatedMap (callback ())
+runDB mp (Return a) = a
