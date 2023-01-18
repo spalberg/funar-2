@@ -36,4 +36,4 @@ module DB where
 data DBCommand a
     -- Idee: Callback, um Programm fortzusetzen
     -- Was ist, wenn wir nichts finden?
-    = Get String (Integer -> a)
+    = Get String (Integer -> b)
