@@ -34,12 +34,18 @@ allRanks = [Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten,
 data Card = Card { suit :: Suit, rank :: Rank }
   deriving (Show, Eq, Ord)
 
+-- data CardComparisonResult = Beats | NotComparable | DoesntBeat
 -- |Eine Karte kann nur eine andere Karte gleicher Farbe nach Wert schlagen
 cardBeats :: Card -> Card -> Maybe Bool
 cardBeats c1 c2 = 
   if suit c1 == suit c2
   then Just (rank c1 > rank c2)
   else Nothing
+
+-- c1 `cardBeats` c2
+
+-- cardBeats c1 c2 == False
+-- cardBeats c2 c1 == True
 
 cartesianProduct :: [a] -> [b] -> [(a, b)]
 cartesianProduct list1 list2 =
@@ -54,7 +60,7 @@ newtype Hand = Hand { unHand :: Set Card }
   deriving (Eq, Show)
 
 makeHand :: [Card] -> Hand
-makeHand cards = Hand (Set.fromList cards)
+makeHand = Hand . Set.fromList --    <- . ist Funktionskomposition
 
 handCards :: Hand -> [Card]
 handCards (Hand set) = Set.toList set
