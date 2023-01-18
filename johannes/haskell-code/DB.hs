@@ -32,8 +32,15 @@ module DB where
 
 -- -> führt noch nicht zum Ziel
 
-
+-- "Beschreibung eines Datenbankprogramms mit Ergebnis vom Typ a"
 data DB a
     -- Idee: Callback, um Programm fortzusetzen
     -- Was ist, wenn wir nichts finden?
     = Get String (Integer -> DB a)
+    --                    v hier könnte auch ID stehen
+    | Put String Integer (() -> DB a)
+    | Return a
+    deriving Show
+
+p1 :: DB String
+p1 = 
