@@ -50,7 +50,7 @@ p1 = Put "Johannes" 36 (\ _ ->
      -- - Monaden
      -- - MonadenTransformatoren
      -- - Freie Monaden
-     -- - Tagless Final / mtl
+     -- - Tagless Final / mtl-Stil
      Put "Johannes" (x+1) (\ _ ->
      Get "Johannes" (\ y ->
      Return (show (x + y))))))
