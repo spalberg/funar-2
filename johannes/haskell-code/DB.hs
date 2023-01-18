@@ -171,4 +171,5 @@ instance Functor DB where
 instance Monad DB where
     (>>=) :: DB a -> (a -> DB b) -> DB b
     (>>=) = splice
+    return :: a -> DB a
     return = Return
