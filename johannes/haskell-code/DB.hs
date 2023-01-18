@@ -42,5 +42,5 @@ data DB a
     | Return a
     deriving Show
 
-p1 :: DB String
-p1 = 
+-- p1 :: DB String
+-- p1 = 
