@@ -168,6 +168,8 @@ instance Functor DB where
         Put key value (\ _ -> fmap f (callback ()))
       Return a -> Return (f a)
 
+instance Applicative DB where
+
 instance Monad DB where
     (>>=) :: DB a -> (a -> DB b) -> DB b
     (>>=) = splice
