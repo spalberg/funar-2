@@ -72,6 +72,19 @@ p1 = Put "Johannes" 36 (\ _ ->
      Get "Johannes" (\ y ->
      Return (show (x + y))))))
 
+p1' :: DB Integer
+p1' = Put "Johannes" 36 (\ _ ->
+     Get "Johannes" (\ x ->
+     -- Nariman möchte hier SMS verschicken mit x
+     -- TODO: algebraische Effekte
+     -- - Monaden
+     -- - MonadenTransformatoren
+     -- - Freie Monaden
+     -- - Tagless Final / mtl-Stil
+     Put "Johannes" (x+1) (\ _ ->
+     Get "Johannes" (\ y ->
+     Return (x + y)))))
+
 -- Wunsch: DB a -> a
 
 -- Baustein, mit dem wir Ablauf zusammenbauen wollen
@@ -150,3 +163,5 @@ instance Functor DB where
       Put key value callback ->
         Put key value (\ _ -> fmap f (callback ()))
       Return a -> Return (f a)
+
+clas
