@@ -199,6 +199,6 @@ runTable (GameOver cont) state revents =
 runTable (RecordEvent event callback) state events =
   runTable (callback ()) (tableProcessEvent event state) (event : events)
 runTable (WaitForCommand callback) state events =
-  (state, reverse events, )
+  (state, reverse events, Left callback)
 runTable (Done result) state events =
-  (state, reverse events, undefined)
+  (state, reverse events, Right result)
