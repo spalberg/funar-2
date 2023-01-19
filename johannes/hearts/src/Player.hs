@@ -1,4 +1,5 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE InstanceSigs #-}
 
 module Player where
 
@@ -179,6 +180,7 @@ data StateTtyPlayer' r
   | WriteLineT String (() -> r)
 
 instance Functor StateTtyPlayer' where
+  fmap :: (a -> b) -> StateTtyPlayer' a -> StateTtyPlayer' b
   fmap f (GetEventT cont) = GetEventT (\event -> f (cont event))
   fmap f (RecordCommandT command cont) = RecordCommandT command (\() -> f (cont ()))
   fmap f (GetPlayerStateT cont) = GetPlayerStateT (\state -> f (cont state))
