@@ -128,5 +128,4 @@ tableLoopM command = do
         Just winner ->
             return winner
         Nothing -> do
-            GetCommand
-            -- tableLoopM undefined
+            WaitForCommand tableLoopM
