@@ -86,6 +86,8 @@ instance Monad Game where
         GameOver (\ x -> (callback x) >>= next)
     (>>=) (PlayerAfter player callback) next =
         PlayerAfter player (\ x -> (callback x) >>= next)
+    (>>=) (RecordEvent event callback) next =
+        RecordEvent event (\ x -> (callback x) >>= next)
 
 -- Tisch erhält einzelnes Command
 -- -> gibt den nächsten Schritt zurück
