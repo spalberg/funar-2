@@ -66,6 +66,7 @@ data Game a =
     | RecordEvent GameEvent (() -> Game a)
     | GameOver (Maybe Player -> Game a)
     | PlayerAfter Player (Player -> Game a)
+    | WaitForCommand (GameCommand -> Game a)
     | Done a
 
 instance Functor Game where
@@ -118,3 +119,13 @@ tableProcessCommand (PlayCard player card) = do
         else do
             recordEventM (IllegalCardAttempted player card)
             return Nothing
+
+-- das gesamte Spiel
+tableLoopM :: GameCommand -> Game Player
+tableLoopM command = do
+    maybeWinner <- tableProcessCommand command
+    case maybeWinner of
+        Just winner ->
+            return winner
+        Nothing ->
+            tableLoopM ???
