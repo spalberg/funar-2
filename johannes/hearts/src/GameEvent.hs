@@ -2,6 +2,7 @@ module GameEvent where
 
 import Cards
 import Data.Map.Strict (Map)
+import qualified Data.Map.Strict as Map
 
 -- Events: Log anlegen von Ereignissen, die in der Anwendung passieren
 -- Log enthält alles, was passiert ist -> Erzählung
