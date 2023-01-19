@@ -87,7 +87,7 @@ instance Monad Game where
     (>>=) (PlayerAfter player callback) next =
         PlayerAfter player (\ x -> (callback x) >>= next)
 
--- Tisch erhält Command
+-- Tisch erhält einzelnes Command
 -- -> gibt den nächsten Schritt zurück
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
 tableProcessCommand (DealHands hands) = undefined
