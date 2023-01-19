@@ -113,12 +113,12 @@ whoTakesTrick (Trick list) =
               Just True -> loop player' card' rest
       in loop player0 card0 rest'
 
-turnOverTrick :: TableState -> Maybe (Trick, Player)
+turnOverTrick :: TableState -> Maybe (Player, Trick)
 turnOverTrick state =
   if turnOver state
   then
     let trick = tableStateTrick state
-    in fmap (\player -> (trick, player)) (whoTakesTrick trick)
+    in fmap (\player -> (player, trick)) (whoTakesTrick trick)
   else Nothing
 
 -- Wert eines Stapels
