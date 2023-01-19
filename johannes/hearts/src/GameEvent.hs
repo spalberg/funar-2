@@ -127,5 +127,6 @@ tableLoopM command = do
     case maybeWinner of
         Just winner ->
             return winner
-        Nothing ->
-            tableLoopM ???
+        Nothing -> do
+            GetCommand
+            -- tableLoopM undefined
