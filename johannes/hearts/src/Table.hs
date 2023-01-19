@@ -163,7 +163,8 @@ data TableState =
 
 -- Events in den Zustand einarbeiten
 tableProcessEvent :: GameEvent -> TableState -> TableState
-tableProcessEvent (HandDealt player hand) state = undefined
+tableProcessEvent (HandDealt player hand) state =
+  state { tableStateHands = dealHand player hand (tableStateHands state) }
 tableProcessEvent (PlayerTurnChanged playeR) state = undefined
 tableProcessEvent (LegalCardPlayed player card) state = undefined
 tableProcessEvent (TrickTaken player trick) state = undefined
