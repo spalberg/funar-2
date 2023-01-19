@@ -24,6 +24,10 @@ legalCard card hand trick =
         firstSuit = suit firstCard
     in  suit card == firstSuit -- ok if suit is followed
         || all ((/= firstSuit) . suit) (handCards hand))) -- ok if no such suit in hand
+  where
+    -- besser wäre:
+    kannBekennen :: Hand -> Suit -> Bool
+    kannBekennen = undefined
 
 -- Wert einer Karte
 cardScore :: Card -> Integer
