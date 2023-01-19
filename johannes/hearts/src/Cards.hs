@@ -129,4 +129,3 @@ pileAddTrick pile trick =
 
 pileCards :: Pile -> [Card]
 pileCards pile = Set.toList (unPile pile)
-
