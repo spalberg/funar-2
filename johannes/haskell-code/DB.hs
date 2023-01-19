@@ -259,3 +259,12 @@ optProg = do
 
 -- >>> optProg
 -- Null
+
+-- ADT:
+
+-- GADTs:
+-- data Feature a where
+--     FloatInputVariable :: String -> Feature Float
+--     StringInputVariable :: String -> Feature String
+--     Normalize :: Float -> Feature Float -> Feature Float
+-- sonst: Validierung
