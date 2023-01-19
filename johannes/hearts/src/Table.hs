@@ -180,3 +180,10 @@ tableProcessEvent (TrickTaken player trick) state =
   }
 tableProcessEvent (GameEnded winner) state = state
 tableProcessEvent (IllegalCardAttempted player card) state = state
+
+runTable :: Game a -> TableState -> [GameEvent]
+  -> (_, _, _)
+runTable (PlayValid player card callback) state events =
+  runTable (callback (playValid state player card)) state events
+runTable (TurnOverTrick callback) state events =
+  runTable (callback (turnOverTrick state)) state events
