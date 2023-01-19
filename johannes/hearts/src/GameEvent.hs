@@ -92,6 +92,8 @@ instance Monad Game where
         PlayerAfter player (\ x -> (callback x) >>= next)
     (>>=) (RecordEvent event callback) next =
         RecordEvent event (\ x -> (callback x) >>= next)
+    (>>=) (WaitForCommand callback) next =
+        WaitForCommand (\ x -> (callback x) >>= next)
 
 -- Tisch erhält einzelnes Command
 -- -> gibt den nächsten Schritt zurück
