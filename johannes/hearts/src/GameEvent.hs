@@ -138,3 +138,11 @@ tableLoopM command = do
             nextCommand <- waitForCommandM
             tableLoopM nextCommand
             -- GetCommand tableLoopM
+
+-- Steht in den Events, wer gewonnen hat?
+eventsWinner :: [GameEvent] -> Maybe Player
+eventsWinner [] = Nothing
+eventsWinner (first : rest) =
+  case first of
+    GameEnded winner -> Just winner
+    _ -> eventsWinner rest
