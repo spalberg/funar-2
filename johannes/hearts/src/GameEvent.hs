@@ -57,6 +57,9 @@ gameOverM = GameOver Done
 playerAfterM :: Player -> Game Player
 playerAfterM player = PlayerAfter player Done
 
+waitForCommandM :: Game GameCommand
+waitForCommandM = WaitForCommand Done
+
 -- Game enthält die abstrakten Schritte des Spielablaufs, losgelöst 
 -- vom jeglichem Zustand
 data Game a =
