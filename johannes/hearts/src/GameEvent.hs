@@ -37,3 +37,80 @@ data GameCommand
     -- | TakeTrick Player
     | DealHands (Map Player Hand)
     -- | Hat wer gewonnen?
+
+-- was wissen wir über den Spielablauf?
+-- Spielablauf ist "wie DB" -> Monade
+
+-- ein einzelner Schritt
+turnOverTrickM :: Game (Maybe (Player, Trick))
+turnOverTrickM = TurnOverTrick Done
+
+isPlayValidM :: Player -> Card -> Game Bool
+isPlayValidM player card = PlayValid player card Done
+
+recordEventM :: GameEvent -> Game ()
+recordEventM event = RecordEvent event Done
+
+gameOverM :: Game (Maybe Player)
+gameOverM = GameOver Done
+
+playerAfterM :: Player -> Game Player
+playerAfterM player = PlayerAfter player Done
+
+data Game a =
+    -- Done :: a -> Game a
+    TurnOverTrick (Maybe (Player, Trick) -> Game a)
+    | PlayValid Player Card (Bool -> Game a)
+    | RecordEvent GameEvent (() -> Game a)
+    | GameOver (Maybe Player -> Game a)
+    | PlayerAfter Player (Player -> Game a)
+    | Done a
+
+instance Functor Game where
+instance Applicative Game where
+
+instance Monad Game where
+    return = Done
+    -- (>>=) :: Game a -> (a -> Game b) -> Game b
+    (>>=) (Done a) next = next a
+    (>>=) (TurnOverTrick callback) next =
+        -- callback :: Maybe (Player, Trick) -> Game a
+        -- next :: a -> Game b
+        -- (>>=)
+        TurnOverTrick (\ x -> (callback x) >>= next)
+    (>>=) (PlayValid player card callback) next =
+        PlayValid player card (\ x -> (callback x) >>= next)
+    (>>=) (GameOver callback) next =
+        GameOver (\ x -> (callback x) >>= next)
+    (>>=) (PlayerAfter player callback) next =
+        PlayerAfter player (\ x -> (callback x) >>= next)
+
+-- Tisch erhält Command
+-- -> gibt den nächsten Schritt zurück
+tableProcessCommand :: GameCommand -> Game (Maybe Player)
+tableProcessCommand (DealHands hands) = undefined
+tableProcessCommand (PlayCard player card) = do
+    isValid <- isPlayValidM player card
+    if isValid 
+        then do
+            recordEventM (LegalCardPlayed player card)
+            turnOverTrick <- turnOverTrickM
+            case turnOverTrick of
+                -- jemand bekommt den Stich
+                Just (trickTaker, trick) -> do
+                    recordEventM (TrickTaken trickTaker trick)
+                    potentialWinner <- gameOverM
+                    case potentialWinner of
+                        Just winner -> do
+                            recordEventM (GameEnded winner)
+                            return (Just winner)
+                        Nothing -> do
+                            recordEventM (PlayerTurnChanged trickTaker)
+                            return Nothing
+                Nothing -> do
+                    nextPlayer <- playerAfterM player
+                    recordEventM (PlayerTurnChanged nextPlayer)
+                    return Nothing
+        else do
+            recordEventM (IllegalCardAttempted player card)
+            return Nothing
