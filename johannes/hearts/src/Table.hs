@@ -181,8 +181,12 @@ tableProcessEvent (TrickTaken player trick) state =
 tableProcessEvent (GameEnded winner) state = state
 tableProcessEvent (IllegalCardAttempted player card) state = state
 
+-- data Either a b =
+--    Left a
+--  | Right b
+
 runTable :: Game a -> TableState -> [GameEvent]
-  -> (TableState, _, _)
+  -> (TableState, [GameEvent], Either (GameCommand -> Game a) a)
 runTable (PlayValid player card callback) state events =
   runTable (callback (playValid state player card)) state events
 runTable (TurnOverTrick callback) state events =
@@ -194,5 +198,7 @@ runTable (GameOver cont) state revents =
 
 runTable (RecordEvent event callback) state events =
   runTable (callback ()) (tableProcessEvent event state) (event : events)
+runTable (WaitForCommand callback) state events =
+  (state, reverse events, )
 runTable (Done result) state events =
   (state, reverse events, undefined)
