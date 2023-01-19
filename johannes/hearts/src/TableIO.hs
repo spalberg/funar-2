@@ -38,3 +38,6 @@ tableIO players =
                 Right _result -> return ()
               return events
      return processCommand
+
+-- main :: IO ()
+-- main = undefined -- hier geht's los
