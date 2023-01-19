@@ -33,7 +33,7 @@ tableIO players =
               let (state', events, step) = runTable (next command) state []              
               case step of
                 Left cont ->
-                  do putStrLn ("NeedsCommand")
+                  do putStrLn ("WaitForCommand")
                      IORef.writeIORef ref (cont, state')
                 Right _result -> return ()
               return events
