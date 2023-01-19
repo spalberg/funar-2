@@ -102,7 +102,7 @@ instance Monad Game where
 -- -> gibt den nächsten Schritt zurück
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
 tableProcessCommand (DealHands hands) = do
-    mapM_ (\ h -> recordEventM (HandDealt h)) (Map.toList hands)
+    mapM_ (\ (p, h) -> recordEventM (HandDealt p h)) (Map.toList hands)
     return Nothing
 tableProcessCommand (PlayCard player card) = do
     isValid <- isPlayValidM player card
