@@ -43,15 +43,6 @@ type PlayerHands = Map Player Hand
 -- eingezogene Karten, pro Spieler
 type PlayerPiles = Map Player Pile
 
-data TableState =
-  TableState
-  { tableStatePlayers :: [Player], -- wer dran ist, steht vorn
-    tableStateHands   :: PlayerHands,
-    tableStatePiles  :: PlayerPiles,
-    tableStateTrick   :: Trick
-  }
-  deriving Show
-
 -- Anfangszustand herstellen
 emptyTableState :: [Player] -> TableState
 emptyTableState players =
@@ -160,6 +151,15 @@ addTrickToPile playerPiles player trick =
 
 dealHand :: Player -> Hand -> PlayerHands -> PlayerHands
 dealHand player hand hands = Map.insert player hand hands
+
+data TableState =
+  TableState
+  { tableStatePlayers :: [Player], -- wer dran ist, steht vorn
+    tableStateHands   :: PlayerHands,
+    tableStatePiles  :: PlayerPiles,
+    tableStateTrick   :: Trick
+  }
+  deriving Show
 
 -- Events in den Zustand einarbeiten
 tableProcessEvent :: GameEvent -> TableState -> TableState
