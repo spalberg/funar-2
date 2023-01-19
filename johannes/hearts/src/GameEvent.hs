@@ -135,3 +135,4 @@ tableLoopM command = do
         Nothing -> do
             nextCommand <- waitForCommandM
             tableLoopM nextCommand
+            -- GetCommand tableLoopM
