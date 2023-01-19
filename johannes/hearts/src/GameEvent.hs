@@ -101,8 +101,9 @@ instance Monad Game where
 -- Tisch erhält einzelnes Command
 -- -> gibt den nächsten Schritt zurück
 tableProcessCommand :: GameCommand -> Game (Maybe Player)
-tableProcessCommand (DealHands hands) =
+tableProcessCommand (DealHands hands) = do
     mapM_ (\ h -> recordEventM (HandDealt h)) (Map.toList hands)
+    return Nothing
 tableProcessCommand (PlayCard player card) = do
     isValid <- isPlayValidM player card
     if isValid 
