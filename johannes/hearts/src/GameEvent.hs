@@ -31,11 +31,13 @@ data GameEvent
     -- könnte auch zweiteilen in TrickClosed und TrickTaken
     | GameEnded Player
     | IllegalCardAttempted Player Card
+    deriving Show
 
 data GameCommand
     = PlayCard Player Card
     -- | TakeTrick Player
     | DealHands (Map Player Hand)
+    deriving Show
     -- | Hat wer gewonnen?
 
 -- was wissen wir über den Spielablauf?
