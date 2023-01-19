@@ -214,3 +214,48 @@ hello = do
     putStrLn "foobar"
     s <- getLine
     putStrLn ("du sagtest: " <> s)
+
+data Optional a =
+    Result a
+    | Null
+    deriving (Eq, Show)
+
+instance Functor Optional where
+    fmap :: (a -> b) -> Optional a -> Optional b
+    fmap f Null = Null
+    fmap f (Result a) = Result (f a)
+
+instance Applicative Optional where
+
+instance Monad Optional where
+    return :: a -> Optional a
+    return = Result
+
+    (>>=) :: Optional a -> (a -> Optional b) -> Optional b
+    (>>=) Null _ = Null
+    (>>=) (Result a) f = f a
+    -- (Result a) >>= f = undefined
+
+-- >>> Result "abc" >>= (\ s -> Result (s ++ "foo"))
+-- Result "abcfoo"
+
+-- >>> Null >>= (\ s -> Result (s ++ "foo"))
+-- Null
+
+-- optProg :: Optional String
+-- optProg = do
+--     let xs = ["a", "b", "c"]
+--     d <- listIndex 5 xs
+--     a <- listIndex 0 xs
+--     b <- listIndex 1 xs
+--     return (a ++ b ++ d)
+
+optProg :: Optional String
+optProg = do
+    d <- Result "foo"
+    a <- Null
+    b <- Result "bar"
+    return (a ++ b ++ d)
+
+-- >>> optProg
+-- Null
