@@ -168,9 +168,15 @@ tableProcessEvent (HandDealt player hand) state =
 tableProcessEvent (PlayerTurnChanged player) state =
   state { tableStatePlayers = rotateTo player (tableStatePlayers state) }
 tableProcessEvent (LegalCardPlayed player card) state =
-tableProcessEvent (TrickTaken player trick) state = undefined
-   state {
-    tableStatePlayers  = rotateTo player (tableStatePlayers state)
+    state {
+    tableStateHands = playCard (tableStateHands state) player card,
+    tableStateTrick = addToTrick player card (tableStateTrick state)
   }
-tableProcessEvent (GameEnded winner) state = undefined
-tableProcessEvent (IllegalCardAttempted player card) state = undefined
+tableProcessEvent (TrickTaken player trick) state =
+    state {
+    tableStatePiles =
+      addTrickToPile (tableStatePiles state) player trick,
+    tableStateTrick = emptyTrick
+  }
+tableProcessEvent (GameEnded winner) state = state
+tableProcessEvent (IllegalCardAttempted player card) state = state
