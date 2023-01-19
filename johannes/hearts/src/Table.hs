@@ -116,7 +116,7 @@ whoTakesTrick (Trick list) =
     ((player0, card0) : rest') ->
       let loop player _ [] = Just player
           loop player card ((player', card') : rest) =
-            case cardBeats card' card of
+            case card' `cardBeats` card of
               Nothing -> loop player card rest
               Just False -> loop player card rest
               Just True -> loop player' card' rest
@@ -135,6 +135,8 @@ pileScore :: Pile -> Integer
 pileScore pile = sum (map cardScore (pileCards pile))
 
 -- Ist das Spiel vorbei und wenn ja wer hat gewonnen?
+-- FIXME: 1) es könnten mehrere Spieler gleich wenige Punkte haben -> Maybe [Player]
+-- FIXME: 2) es fehlt die Regel, dass wenn ein Spieler _alle_ Punkte hat, derjenige gewinnt
 gameOver :: TableState -> Maybe Player
 gameOver state =
   if all isHandEmpty (Map.elems (tableStateHands state))
