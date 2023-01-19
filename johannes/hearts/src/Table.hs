@@ -182,8 +182,17 @@ tableProcessEvent (GameEnded winner) state = state
 tableProcessEvent (IllegalCardAttempted player card) state = state
 
 runTable :: Game a -> TableState -> [GameEvent]
-  -> (_, _, _)
+  -> (TableState, _, _)
 runTable (PlayValid player card callback) state events =
   runTable (callback (playValid state player card)) state events
 runTable (TurnOverTrick callback) state events =
   runTable (callback (turnOverTrick state)) state events
+runTable (PlayerAfter player cont) state revents =
+  runTable (cont (playerAfter state player)) state revents
+runTable (GameOver cont) state revents =
+  runTable (cont (gameOver state)) state revents
+
+runTable (RecordEvent event callback) state events =
+  runTable (callback ()) (tableProcessEvent event state) (event : events)
+runTable (Done result) state events =
+  (state, reverse events, undefined)
