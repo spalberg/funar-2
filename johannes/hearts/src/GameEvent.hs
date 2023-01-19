@@ -57,6 +57,8 @@ gameOverM = GameOver Done
 playerAfterM :: Player -> Game Player
 playerAfterM player = PlayerAfter player Done
 
+-- Game enthält die abstrakten Schritte des Spielablaufs, losgelöst 
+-- vom jeglichem Zustand
 data Game a =
     -- Done :: a -> Game a
     TurnOverTrick (Maybe (Player, Trick) -> Game a)
