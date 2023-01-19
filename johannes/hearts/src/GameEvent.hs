@@ -133,4 +133,5 @@ tableLoopM command = do
         Just winner ->
             return winner
         Nothing -> do
-            WaitForCommand tableLoopM
+            nextCommand <- waitFormCommandM
+            tableLoopM nextCommand
