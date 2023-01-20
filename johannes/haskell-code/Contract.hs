@@ -53,6 +53,7 @@ data Contract
     | Max Contract Contract
     | Min Contract Contract
     | Short Contract
+    | Zero
     deriving Show
 
 -- >>> One EUR
@@ -96,5 +97,22 @@ data Payment = MkPayment Direction Date Amount Currency
 
 -- data State s a = MkState (s -> (s, a))
 
+multiplyAmount :: Amount -> Payment -> Payment
+multiplyAmount = undefined
+
+terminate :: ([Payment], Contract)
+terminate = ([], Zero)
+
 semantics :: Contract -> Date -> ([Payment], Contract)
-semantics = undefined
+semantics (One currency) now = ([MkPayment MkLong now 1 currency], Zero)
+semantics (Times amount Zero) now = terminate
+semantics (Times amount contract) now =
+    let (payments, residualContract) = semantics contract now
+    in (map (multiplyAmount amount) payments, Times amount residualContract)
+semantics (Plus Zero Zero) now = terminate
+semantics (Plus c1 c2) now =
+    let (payments1, residual1) = semantics c1 now
+        (payments2, residual2) = semantics c2 now
+        -- könnten bspw. bei Zero hier kein Plus mehr erzeugen
+    in (payments1 ++ payments2, Plus residual1 residual2)
+semantics _ _ = undefined
